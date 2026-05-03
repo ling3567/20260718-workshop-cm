@@ -1,0 +1,935 @@
+
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://ling3567.github.io/20260718-ai-med-workshop/ -->
+<html lang="zh-TW"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI × 醫學教學應用工作坊 | 115年7月18日</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link href="./index_files/css2" rel="stylesheet">
+  <style>
+    :root {
+      --teal:      #5BBFB5;
+      --teal-dark: #3A9D8F;
+      --teal-deep: #2e8078;
+      --navy:      #1B3A5C;
+      --light-bg:  #E8F4F8;
+      --lt-teal:   #EAF8F6;
+      --white:     #ffffff;
+      --text:      #2c3e50;
+      --text-mid:  #4a6070;
+      --text-muted:#7a90a4;
+      --border:    #cde4eb;
+      --card-sh:   0 2px 14px rgba(91,191,181,.11);
+      --font:'Noto Sans TC','Microsoft JhengHei','微軟正黑體',sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:21px}
+    body{font-family:var(--font);color:var(--text);background:#f7fbfc;line-height:1.7}
+    @media(max-width:760px){html{font-size:17px}}
+
+    /* ══ NAV ══ */
+    #top-nav{position:sticky;top:0;z-index:100;background:var(--navy);box-shadow:0 2px 10px rgba(27,58,92,.22)}
+    .nav-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:56px}
+    .nav-logo{color:var(--teal);font-weight:700;font-size:.88rem;letter-spacing:.03em;white-space:nowrap;flex-shrink:0;display:flex;align-items:center;gap:.6rem}
+    .nav-logo img{height:34px;width:34px;display:block;background:#fff;border-radius:50%;padding:3px;box-shadow:0 0 0 2px rgba(91,191,181,.45);object-fit:contain}
+    .nav-links{display:flex;list-style:none;gap:0}
+    .nav-links a{display:block;padding:.35rem .65rem;color:#b8cfe0;text-decoration:none;font-size:.76rem;border-radius:6px;transition:background .2s,color .2s;white-space:nowrap}
+    .nav-links a:hover{background:rgba(91,191,181,.18);color:#fff}
+    .nav-links a.nav-poster{background:rgba(91,191,181,.15);color:var(--teal);border:1px solid rgba(91,191,181,.3);border-radius:12px;margin-left:.3rem}
+    .nav-links a.nav-poster:hover{background:rgba(91,191,181,.3)}
+    .nav-burger{display:none;background:none;border:none;cursor:pointer;padding:6px;color:#fff;font-size:1.4rem;line-height:1}
+    /* 中螢幕：縮短學會名稱字級，避免擠到 nav links */
+    @media(max-width:1280px){
+      .nav-logo{font-size:.82rem}
+      .nav-logo img{height:30px;width:30px}
+      .nav-links a{padding:.35rem .55rem;font-size:.73rem}
+    }
+    /* 較窄筆電以下：直接收成漢堡選單 */
+    @media(max-width:1080px){
+      .nav-links{display:none;flex-direction:column;position:absolute;top:56px;left:0;right:0;background:var(--navy);padding:.5rem 1rem 1rem;gap:2px}
+      .nav-links.open{display:flex}
+      .nav-links a{padding:.55rem .8rem;font-size:.86rem}
+      .nav-links a.nav-poster{margin-left:0;margin-top:.3rem}
+      .nav-burger{display:block}
+      .nav-logo{font-size:.85rem}
+    }
+    @media(max-width:560px){
+      .nav-logo{font-size:.78rem}
+      .nav-logo img{height:28px;width:28px}
+    }
+
+    /* ══ HERO ══ */
+    #hero{background:#fff;border-bottom:1px solid #e4eff4;position:relative;overflow:hidden}
+    #hero::after{content:'';position:absolute;top:0;right:0;width:46%;height:100%;background:linear-gradient(160deg,var(--lt-teal) 0%,#d4eef4 100%);clip-path:polygon(12% 0,100% 0,100% 100%,0 100%);pointer-events:none;z-index:0}
+    .hero-inner{max-width:1280px;margin:0 auto;padding:4.5rem 1.5rem 3.5rem;position:relative}
+    /* hero right decoration — 2×2 card grid */
+    .hero-deco{
+      position:absolute;top:0;right:0;width:46%;height:100%;z-index:1;pointer-events:none;
+      clip-path:polygon(12% 0,100% 0,100% 100%,0 100%);
+      display:flex;align-items:center;justify-content:center;overflow:hidden;
+    }
+    .hd-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(91,191,181,.22) 1.5px,transparent 1.5px);background-size:28px 28px;pointer-events:none}
+    .hd-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:.8rem;
+      padding:1rem 9% 1rem 24%;
+      position:relative;z-index:1;width:100%;
+    }
+    .hd-gc{
+      background:rgba(255,255,255,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+      border:1px solid rgba(91,191,181,.3);border-radius:16px;
+      padding:1.1rem .85rem .95rem;
+      display:flex;flex-direction:column;align-items:center;gap:.55rem;text-align:center;
+      box-shadow:0 4px 18px rgba(27,58,92,.1);
+    }
+    .hd-gc-icon{
+      width:40px;height:40px;border-radius:11px;
+      background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .hd-gc-label{font-size:.72rem;font-weight:700;color:var(--navy);line-height:1.35}
+    @media(max-width:580px){.hero-deco{display:none}#hero::after{display:none}}
+    .hero-content{position:relative;z-index:1;max-width:580px}
+    .hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:var(--lt-teal);border:1px solid rgba(91,191,181,.35);color:var(--teal-dark);padding:.24rem .88rem;border-radius:20px;font-size:.74rem;letter-spacing:.08em;font-weight:600;margin-bottom:1.2rem}
+    .hero-title{font-size:clamp(1.9rem,5vw,3.1rem);font-weight:900;color:var(--navy);letter-spacing:.03em;line-height:1.15;margin-bottom:.55rem}
+    .hero-title .x-accent{color:var(--teal)}
+    .hero-subtitle{font-size:clamp(.88rem,2vw,1.05rem);color:var(--teal-dark);font-weight:600;margin-bottom:.35rem}
+    .hero-slogan{font-size:.84rem;color:var(--text-muted);margin-bottom:1.7rem;font-style:italic}
+    .hero-cta{display:flex;gap:.8rem;flex-wrap:wrap}
+    .btn-fill{background:var(--teal);color:#fff;padding:.68rem 1.75rem;border:none;border-radius:26px;font-size:.93rem;font-weight:700;font-family:var(--font);cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 14px rgba(91,191,181,.36);transition:background .2s,transform .15s}
+    .btn-fill:hover{background:var(--teal-deep);transform:translateY(-2px)}
+    .btn-ghost{background:transparent;color:var(--navy);padding:.68rem 1.75rem;border:1.5px solid var(--border);border-radius:26px;font-size:.93rem;font-weight:600;font-family:var(--font);cursor:pointer;text-decoration:none;display:inline-block;transition:border-color .2s,background .2s}
+    .btn-ghost:hover{border-color:var(--teal);background:var(--lt-teal)}
+
+    /* ── countdown strip (small, bottom of hero) ── */
+    .cd-strip{position:relative;z-index:1;display:flex;align-items:center;gap:.9rem;margin-top:2rem;flex-wrap:wrap}
+    .cd-label{font-size:.7rem;color:var(--text-muted);font-weight:500;letter-spacing:.06em}
+    .cd-boxes{display:flex;gap:.4rem}
+    .cbox{background:var(--light-bg);border-radius:7px;padding:.32rem .55rem;text-align:center;min-width:44px}
+    .cbox-num{font-size:.95rem;font-weight:900;color:var(--navy);line-height:1}
+    .cbox-unit{font-size:.52rem;color:var(--text-muted);letter-spacing:.06em;margin-top:.08rem}
+    #cd-done{display:none;font-size:.78rem;font-weight:700;color:var(--teal-dark)}
+
+    /* ══ SECTION ══ */
+    .section{padding:4.2rem 2rem}
+    .section-alt{background:var(--light-bg)}
+    .section-inner{max-width:1180px;margin:0 auto}
+    .sec-hd{text-align:center;margin-bottom:2.4rem}
+    .sec-eye{font-size:.7rem;font-weight:700;letter-spacing:.16em;color:var(--teal-dark);text-transform:uppercase;margin-bottom:.4rem}
+    .sec-title{font-size:clamp(1.25rem,2.8vw,1.75rem);font-weight:900;color:var(--navy);display:inline-block;position:relative}
+    .sec-title::after{content:'';display:block;width:36px;height:3px;background:var(--teal);border-radius:2px;margin:.4rem auto 0}
+
+    /* ══ ABOUT ══ */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    @media(max-width:660px){.about-grid{grid-template-columns:1fr}}
+    .about-card{background:#fff;border-radius:16px;padding:1.8rem;box-shadow:var(--card-sh)}
+    .about-card-title{font-size:.95rem;font-weight:800;color:var(--navy);margin-bottom:1.3rem;padding-bottom:.65rem;border-bottom:2px solid var(--light-bg)}
+    .fact-list{list-style:none;display:flex;flex-direction:column;gap:1.05rem}
+    .fact-item{display:flex;align-items:flex-start;gap:.85rem}
+    .fact-circle{width:34px;height:34px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;font-size:.76rem;font-weight:900;margin-top:.12rem}
+    .fact-body{flex:1}
+    .fact-main{font-size:.9rem;font-weight:600;color:var(--text);line-height:1.5}
+    .fact-sub{font-size:.77rem;color:var(--text-muted);margin-top:.08rem;line-height:1.55}
+    .free-tag{display:inline-block;background:#e0f7f4;color:var(--teal-deep);font-size:.67rem;font-weight:700;padding:.07rem .42rem;border-radius:5px;margin-left:.3rem;vertical-align:middle}
+    .ai-tag{display:inline-block;background:var(--light-bg);color:var(--navy);font-size:.69rem;font-weight:600;padding:.1rem .42rem;border-radius:6px;margin:.1rem .1rem 0 0}
+    .desc-card{background:linear-gradient(145deg,#f0fbf9 0%,#e6f5f8 100%);border-radius:16px;padding:1.8rem;box-shadow:var(--card-sh);border:1px solid rgba(91,191,181,.18);position:relative;overflow:hidden}
+    .desc-card::before{content:'';position:absolute;top:-28px;right:-28px;width:110px;height:110px;border-radius:50%;background:rgba(91,191,181,.1);pointer-events:none}
+    .desc-card-title{font-size:.95rem;font-weight:800;color:var(--navy);margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem}
+    .desc-icon{width:32px;height:32px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .desc-text{font-size:.86rem;color:var(--text-mid);line-height:1.9}
+    .desc-text p{margin-bottom:.85rem}
+    .desc-text p:last-child{margin-bottom:0}
+    .desc-hl{font-weight:700;color:var(--teal-deep)}
+    .about-btns{margin-top:1.3rem;display:flex;gap:.65rem;flex-wrap:wrap}
+    .btn-sm{font-size:.8rem;padding:.47rem 1.2rem}
+
+    /* ══ AGENDA ══ */
+    .agenda-wrap{overflow-x:auto}
+    .agenda-table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--card-sh)}
+    .agenda-table thead tr{background:var(--navy)}
+    .agenda-table th{color:#9fc4d8;font-size:.73rem;font-weight:700;letter-spacing:.1em;padding:.82rem 1.2rem;text-align:left}
+    .agenda-table td{padding:.8rem 1.2rem;border-bottom:1px solid #eef6f9;vertical-align:middle}
+    .agenda-table tr:last-child td{border-bottom:none}
+    .agenda-table tr:hover td{background:#f5fdfb}
+    .atime{font-size:.79rem;font-weight:700;color:var(--teal-dark);white-space:nowrap;min-width:108px}
+    .atopic{font-size:.88rem;color:var(--text);font-weight:500}
+    .atopic small{display:block;font-size:.74rem;color:var(--text-muted);font-weight:400;margin-top:.08rem}
+    .atag{font-size:.69rem;font-weight:700;padding:.16rem .55rem;border-radius:9px;white-space:nowrap}
+    .atag-l{background:#e2f5f3;color:var(--teal-deep)}
+    .atag-w{background:#fff3cd;color:#8a6000}
+    .atag-b{background:#f1f4f8;color:#8a9eb5}
+    .atag-a{background:#eef2f7;color:#5a7390}
+    .row-alt td{background:#fafcfe}
+    .aico{display:inline-flex;align-items:center;gap:.45rem}
+    .adot{width:7px;height:7px;border-radius:50%;background:var(--teal);flex-shrink:0}
+    .adot-grey{background:#b0c4d4}
+    .adot-gold{background:#c9a84c}
+    .aform{font-size:.8rem;color:var(--text-muted);white-space:nowrap;vertical-align:middle}
+
+    /* ══ SPEAKERS ══ */
+    .speakers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.3rem}
+    .speaker-card{background:#fff;border-radius:14px;padding:1.6rem 1.5rem;box-shadow:var(--card-sh);transition:transform .2s,box-shadow .2s}
+    .speaker-card:hover{transform:translateY(-3px);box-shadow:0 8px 26px rgba(91,191,181,.17)}
+    .sp-name{font-size:1.05rem;font-weight:900;color:var(--navy);margin-bottom:.2rem}
+    .sp-org{font-size:.8rem;color:var(--text-muted);margin-bottom:.85rem}
+    .sp-badge{display:inline-block;background:var(--lt-teal);color:var(--teal-dark);font-size:.7rem;font-weight:700;padding:.22rem .7rem;border-radius:20px;margin-bottom:.65rem;letter-spacing:.04em}
+    .sp-expertise{font-size:.86rem;color:var(--text-mid)}
+
+    /* ══ FORM ══ */
+    .form-card{background:#fff;border-radius:18px;padding:2.4rem 2rem;box-shadow:0 4px 28px rgba(27,58,92,.1);}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .form-group{margin-bottom:1.15rem}
+    .form-group.full{grid-column:1/-1}
+    label{display:block;font-size:.79rem;font-weight:700;color:var(--navy);margin-bottom:.28rem;letter-spacing:.02em}
+    label .req{color:#d94040;margin-left:2px}
+    input[type="text"],input[type="email"],input[type="tel"],select,textarea{width:100%;padding:.6rem .85rem;border:1.5px solid var(--border);border-radius:9px;font-size:.87rem;font-family:var(--font);color:var(--text);background:#fdffff;transition:border-color .2s,box-shadow .2s;outline:none;appearance:none}
+    input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(91,191,181,.16)}
+    select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%235BBFB5' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .8rem center;padding-right:2.1rem;cursor:pointer}
+    .radio-group{display:flex;flex-wrap:wrap;gap:.55rem 1.2rem;margin-top:.2rem}
+    .radio-label{display:flex;align-items:center;gap:.4rem;font-size:.87rem;font-weight:400;color:var(--text);cursor:pointer;white-space:nowrap}
+    .radio-label input[type="radio"]{width:15px;height:15px;accent-color:var(--teal)}
+    @media(max-width:560px){
+      .radio-group{flex-direction:column;gap:.6rem}
+      .radio-label{padding:.55rem .8rem;background:#f7fbfc;border:1px solid var(--border);border-radius:10px;width:100%}
+      .radio-label:has(input:checked){background:var(--lt-teal);border-color:var(--teal)}
+    }
+    .form-hint{font-size:.71rem;color:var(--text-muted);margin-top:.22rem}
+    #other-profession-wrap{margin-top:.52rem;display:none}
+    .form-notice-box{display:flex;align-items:flex-start;gap:.55rem;background:#f0f9f8;border:1px solid rgba(91,191,181,.4);border-radius:10px;padding:.82rem 1rem;font-size:.8rem;color:var(--teal-dark);line-height:1.6;margin-top:1.1rem}
+    .form-notice-box svg{flex-shrink:0;margin-top:.1rem;color:var(--teal-dark)}
+    .form-submit-row{text-align:center;margin-top:1.3rem}
+    .btn-submit{background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);color:#fff;padding:.82rem 2.8rem;border:none;border-radius:28px;font-size:1rem;font-weight:700;font-family:var(--font);cursor:pointer;box-shadow:0 5px 18px rgba(91,191,181,.4);transition:transform .15s,box-shadow .2s;letter-spacing:.04em}
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(91,191,181,.46)}
+    #form-success{display:none;text-align:center;padding:2rem}
+    #form-success .sico{font-size:2.8rem;margin-bottom:.7rem}
+    #form-success h3{font-size:1.25rem;color:var(--navy);margin-bottom:.35rem}
+    #form-success p{color:var(--text-muted);font-size:.87rem}
+    #form-error{display:none;background:#fff0f0;border:1px solid #f5c0c0;border-radius:8px;padding:.72rem .95rem;font-size:.82rem;color:#c0392b;margin-top:.85rem}
+
+    /* ══ TRANSPORT + MAP ══ */
+    .tm-grid{display:grid;grid-template-columns:1fr 340px;gap:1.8rem;align-items:start}
+    @media(max-width:760px){.tm-grid{grid-template-columns:1fr}}
+
+    /* transport card */
+    .transport-card{background:#fff;border-radius:16px;padding:1.8rem;box-shadow:var(--card-sh)}
+    .tc-notice{display:flex;align-items:flex-start;gap:.6rem;background:#FFF8E6;border:1px solid #ffe0a0;border-radius:10px;padding:.75rem 1rem;margin-bottom:1.3rem;font-size:.82rem;color:#7a5500;line-height:1.5}
+    .tc-notice-ico{flex-shrink:0;margin-top:.1rem}
+    .tc-link{display:inline-flex;align-items:center;gap:.35rem;font-size:.79rem;color:var(--teal-dark);text-decoration:none;margin-bottom:1.3rem;padding:.3rem .7rem;background:var(--lt-teal);border-radius:8px;transition:background .2s}
+    .tc-link:hover{background:#d0f2ee}
+    .tc-rows{list-style:none;display:flex;flex-direction:column;gap:.9rem}
+    .tc-row{display:flex;align-items:flex-start;gap:.9rem}
+    .tc-icon{width:38px;height:38px;border-radius:9px;background:var(--lt-teal);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .tc-body{}
+    .tc-mode{font-size:.78rem;font-weight:800;color:var(--navy);margin-bottom:.12rem;letter-spacing:.04em}
+    .tc-desc{font-size:.83rem;color:var(--text-mid);line-height:1.65}
+    .tc-arrow{color:var(--teal);font-weight:700}
+
+    /* map card */
+    .map-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:var(--card-sh)}
+    .map-card-head{padding:.85rem 1.1rem;font-size:.82rem;font-weight:700;color:var(--navy);border-bottom:1px solid var(--light-bg);display:flex;align-items:center;gap:.45rem}
+    .map-wrap{height:260px}
+    .map-wrap iframe{width:100%;height:100%;border:0;display:block}
+    .map-card-foot{padding:.65rem 1.1rem;border-top:1px solid var(--light-bg)}
+    .map-link{display:inline-flex;align-items:center;gap:.35rem;font-size:.76rem;color:var(--teal-dark);text-decoration:none;font-weight:600}
+    .map-link:hover{text-decoration:underline}
+
+    /* ══ CONTACT ══ */
+    .contact-row{display:flex;flex-wrap:wrap;gap:1.1rem;justify-content:center;margin-top:1.3rem}
+    .contact-chip{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:.85rem 1.35rem;text-align:center;min-width:185px}
+    .chip-lbl{font-size:.67rem;font-weight:700;color:var(--teal-dark);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.32rem}
+    .chip-val{font-size:.84rem;color:var(--text);line-height:1.55}
+    .chip-val a{color:var(--teal-dark);text-decoration:none}
+    .chip-val a:hover{text-decoration:underline}
+
+    /* ══ CONTACT GRID ══ */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    @media(max-width:660px){.contact-grid{grid-template-columns:1fr}}
+    .contact-card{background:#fff;border-radius:16px;padding:1.8rem;box-shadow:var(--card-sh)}
+    .contact-card-title{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:1.1rem;padding-bottom:.65rem;border-bottom:2px solid var(--light-bg)}
+    .org-list{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+    .org-item{display:flex;align-items:flex-start;gap:.55rem;font-size:.9rem;color:var(--text);line-height:1.55}
+    .org-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:.55rem}
+    .ci-rows{display:flex;flex-direction:column;gap:.85rem}
+    .ci-row{display:flex;align-items:flex-start;gap:.8rem}
+    .ci-lbl{font-size:.72rem;font-weight:700;color:var(--teal-dark);letter-spacing:.05em;white-space:nowrap;padding-top:.18rem;min-width:46px}
+    .ci-val{font-size:.88rem;color:var(--text);line-height:1.55}
+    .ci-val a{color:var(--teal-dark);text-decoration:none}
+    .ci-val a:hover{text-decoration:underline}
+
+    /* ══ REGISTRATION INFO ══ */
+    .notice-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    @media(max-width:660px){.notice-grid{grid-template-columns:1fr}}
+    .fee-card,.notice-card{background:#fff;border-radius:16px;padding:1.8rem;box-shadow:var(--card-sh)}
+    .fee-card-title,.notice-card-title{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:1.2rem;padding-bottom:.65rem;border-bottom:2px solid var(--light-bg)}
+    .fee-row{display:flex;justify-content:space-between;align-items:center;padding:.88rem 0;border-bottom:1px solid var(--light-bg)}
+    .fee-row:last-child{border-bottom:none}
+    .fee-label{font-size:.88rem;color:var(--text)}
+    .fee-amount{font-size:.9rem;font-weight:700;color:var(--text);white-space:nowrap;margin-left:.8rem}
+    .fee-free{color:var(--teal-dark);font-weight:700;font-size:.9rem;white-space:nowrap;margin-left:.8rem}
+    .notice-list{list-style:none;display:flex;flex-direction:column;gap:.88rem}
+    .notice-item{display:flex;align-items:flex-start;gap:.65rem;font-size:.86rem;color:var(--text-mid);line-height:1.65}
+    .notice-bullet{width:7px;height:7px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:.52rem}
+
+    /* ══ FOOTER ══ */
+    footer{background:var(--navy);color:#7a9ab8;text-align:center;padding:1.7rem 1rem;font-size:.77rem;line-height:1.9}
+    footer a{color:var(--teal);text-decoration:none}
+    footer .f-logo{font-size:.92rem;font-weight:900;color:var(--teal);margin-bottom:.3rem}
+
+    @media(max-width:580px){
+      .form-row{grid-template-columns:1fr}
+      .form-group.full{grid-column:auto}
+      .agenda-table th:last-child,.agenda-table td:last-child{display:none}
+      .section{padding:2.6rem 1rem}
+      #hero{padding:2.8rem 1.1rem 2.5rem}
+      #hero::after{display:none}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="top-nav" role="navigation">
+  <div class="nav-inner">
+    <span class="nav-logo"><img src="images/logo.png" alt="台灣醫事聯合臨床技能發展學會 LOGO">台灣醫事聯合臨床技能發展學會</span>
+    <button class="nav-burger" id="burger" aria-label="選單">☰</button>
+    <ul class="nav-links" id="nav-menu">
+      <li><a href="https://ling3567.github.io/20260718-ai-med-workshop/#about">活動資訊</a></li>
+      <li><a href="https://ling3567.github.io/20260718-ai-med-workshop/#agenda">活動議程</a></li>
+      <li><a href="https://ling3567.github.io/20260718-ai-med-workshop/#speakers">講師介紹</a></li>
+      <li><a href="https://ling3567.github.io/20260718-ai-med-workshop/#reg-info">報名資訊</a></li>
+      <li><a href="https://ling3567.github.io/20260718-ai-med-workshop/#register">立即報名</a></li>
+      <li><a href="https://ling3567.github.io/20260718-ai-med-workshop/#transport">交通資訊</a></li>
+      <li><a href="https://ling3567.github.io/20260718-ai-med-workshop/#contact">聯絡資訊</a></li>
+      <li><a href="images/1150718海報.pdf" class="nav-poster" target="_blank" rel="noopener">海報下載</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-inner">
+  <!-- 右側裝飾：inside .hero-inner，對齊 nav 左右邊界 -->
+  <div class="hero-deco" aria-hidden="true">
+    <div class="hd-dots"></div>
+    <div class="hd-grid">
+      <!-- 生成式 AI 基礎 -->
+      <div class="hd-gc">
+        <div class="hd-gc-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"></path>
+            <path d="M12 12v2"></path>
+          </svg>
+        </div>
+        <span class="hd-gc-label">生成式 AI<br>基礎概念</span>
+      </div>
+      <!-- 人機協作 -->
+      <div class="hd-gc">
+        <div class="hd-gc-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+            <polyline points="8 21 12 17 16 21"></polyline>
+            <path d="M9 10l2 2 4-4"></path>
+          </svg>
+        </div>
+        <span class="hd-gc-label">人機協作<br>實務應用</span>
+      </div>
+      <!-- 教學設計 -->
+      <div class="hd-gc">
+        <div class="hd-gc-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path>
+          </svg>
+        </div>
+        <span class="hd-gc-label">AI 融入<br>教學設計</span>
+      </div>
+      <!-- 分組實作 -->
+      <div class="hd-gc">
+        <div class="hd-gc-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path>
+          </svg>
+        </div>
+        <span class="hd-gc-label">分組實作<br>成果分享</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg>
+      限額50名
+    </div>
+    <h1 class="hero-title">AI <span class="x-accent">×</span> 醫學教學<br>應用工作坊</h1>
+    <p class="hero-subtitle">生成式AI × 人機協作 × 教學設計實作</p>
+    <p class="hero-slogan">善用 AI 工具，優化教學設計流程</p>
+    <div class="hero-cta">
+      <a href="https://ling3567.github.io/20260718-ai-med-workshop/#register" class="btn-fill">立即報名</a>
+    </div>
+
+    <!-- 倒數：小巧，放在 hero 下方 -->
+    <div class="cd-strip">
+      <span class="cd-label">距離活動</span>
+      <div class="cd-boxes" id="cd-boxes">
+        <div class="cbox"><div class="cbox-num" id="cd-d">75</div><div class="cbox-unit">天</div></div>
+        <div class="cbox"><div class="cbox-num" id="cd-h">17</div><div class="cbox-unit">時</div></div>
+        <div class="cbox"><div class="cbox-num" id="cd-m">23</div><div class="cbox-unit">分</div></div>
+        <div class="cbox"><div class="cbox-num" id="cd-s">30</div><div class="cbox-unit">秒</div></div>
+      </div>
+      <span id="cd-done"></span>
+    </div>
+  </div><!-- .hero-content end -->
+  </div><!-- .hero-inner end -->
+</section>
+
+
+<!-- ══ ABOUT ══ -->
+<section id="about" class="section">
+  <div class="section-inner">
+    <div class="sec-hd">
+      <div class="sec-eye">ABOUT THE EVENT</div>
+      <h2 class="sec-title">活動資訊</h2>
+    </div>
+    <div class="about-grid">
+
+      <!-- 左：事實清單 -->
+      <div class="about-card">
+        <div class="about-card-title">活動資訊</div>
+        <ul class="fact-list">
+          <li class="fact-item">
+            <div class="fact-circle">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            </div>
+            <div class="fact-body">
+              <div class="fact-main">115年7月18日（星期六）</div>
+              <div class="fact-sub">13:15 – 17:30　（12:50 開始報到）</div>
+            </div>
+          </li>
+          <li class="fact-item">
+            <div class="fact-circle">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            </div>
+            <div class="fact-body">
+              <div class="fact-main">奇美醫院 第五醫療大樓 5樓 552會議室</div>
+              <div class="fact-sub">台南市永康區中華路901號</div>
+            </div>
+          </li>
+          <li class="fact-item">
+            <div class="fact-circle">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path></svg>
+            </div>
+            <div class="fact-body">
+              <div class="fact-main">對AI創新教學有興趣之臨床教師</div>
+              <div class="fact-sub">限額 50 名（額滿為止）</div>
+            </div>
+          </li>
+        </ul>
+        <div class="about-btns">
+          <a href="https://ling3567.github.io/20260718-ai-med-workshop/#register" class="btn-fill btn-sm">立即報名</a>
+          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=AI+%C3%97+%E9%86%AB%E5%AD%B8%E6%95%99%E5%AD%B8%E6%87%89%E7%94%A8%E5%B7%A5%E4%BD%9C%E5%9D%8A&amp;dates=20260718T131500%2F20260718T173000&amp;details=%E7%94%9F%E6%88%90%E5%BC%8FAI+%C3%97+%E4%BA%BA%E6%A9%9F%E5%8D%94%E4%BD%9C+%C3%97+%E6%95%99%E5%AD%B8%E8%A8%AD%E8%A8%88%E5%AF%A6%E4%BD%9C&amp;location=%E5%A5%87%E7%BE%8E%E9%86%AB%E9%99%A2+552%E6%9C%83%E8%AD%B0%E5%AE%A4" target="_blank" rel="noopener" class="btn-ghost btn-sm">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:middle;margin-right:3px"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            加入行事曆
+          </a>
+        </div>
+      </div>
+
+      <!-- 右：工作坊介紹 -->
+      <div class="desc-card">
+        <div class="desc-card-title">
+          <div class="desc-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg>
+          </div>
+          關於本工作坊
+        </div>
+        <div class="desc-text">
+          <p>在生成式AI快速發展的時代，臨床教學不再只是經驗傳承，而是邁向「人機協作」的新模式。</p>
+          <p>本工作坊將帶領您從AI基礎概念出發，透過實務案例與任務拆解，學習如何運用AI工具協助教學設計，並於分組實作中，完成一套可實際應用的教學活動。</p>
+          <p><span class="desc-hl">不只是理解AI，更能真正應用於教學現場 ——</span></p>
+          <p>讓AI成為您的教學助力，提升效率、優化設計，打造更具影響力的臨床教學。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ AGENDA ══ -->
+<section id="agenda" class="section section-alt">
+  <div class="section-inner">
+    <div class="sec-hd">
+      <div class="sec-eye">SCHEDULE</div>
+      <h2 class="sec-title">活動議程</h2>
+    </div>
+    <div class="agenda-wrap">
+      <table class="agenda-table">
+        <thead>
+          <tr><th>時間</th><th>主題</th><th style="width:80px">形式</th></tr>
+        </thead>
+        <tbody>
+          <tr class="row-alt">
+            <td class="atime">12:50 – 13:15</td>
+            <td class="atopic"><div class="aico"><div class="adot adot-grey"></div>報到</div></td>
+            <td class="aform">—</td>
+          </tr>
+          <tr>
+            <td class="atime">13:15 – 13:20</td>
+            <td class="atopic"><div class="aico"><div class="adot adot-grey"></div>致歡迎詞</div></td>
+            <td class="aform">—</td>
+          </tr>
+          <tr class="row-alt">
+            <td class="atime">13:20 – 14:20</td>
+            <td class="atopic"><div class="aico"><div class="adot"></div>生成式AI基礎概念與限制、人機協作模型</div></td>
+            <td class="aform">講授</td>
+          </tr>
+          <tr>
+            <td class="atime">14:20 – 15:20</td>
+            <td class="atopic"><div class="aico"><div class="adot"></div>CLI/IDE 人機協作實務：個別任務拆解示例</div></td>
+            <td class="aform">講授</td>
+          </tr>
+          <tr class="row-alt">
+            <td class="atime">15:20 – 15:30</td>
+            <td class="atopic"><div class="aico"><div class="adot adot-grey"></div>Coffee Break</div></td>
+            <td class="aform">—</td>
+          </tr>
+          <tr>
+            <td class="atime">15:30 – 16:30</td>
+            <td class="atopic"><div class="aico"><div class="adot"></div>AI 導入醫學教育實務：由課程設計出發</div></td>
+            <td class="aform">講授</td>
+          </tr>
+          <tr class="row-alt">
+            <td class="atime">16:30 – 17:20</td>
+            <td class="atopic"><div class="aico"><div class="adot adot-gold"></div>分組設計 AI 融入教學活動、成果分享與講評</div></td>
+            <td class="aform">講授＋實作</td>
+          </tr>
+          <tr>
+            <td class="atime">17:20 – 17:30</td>
+            <td class="atopic"><div class="aico"><div class="adot adot-grey"></div>綜合討論 + QA</div></td>
+            <td class="aform">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SPEAKERS ══ -->
+<section id="speakers" class="section">
+  <div class="section-inner">
+    <div class="sec-hd">
+      <div class="sec-eye">SPEAKERS</div>
+      <h2 class="sec-title">講師陣容</h2>
+    </div>
+    <div class="speakers-grid">
+
+      <div class="speaker-card">
+        <div class="sp-name">劉政亨 醫師</div>
+        <div class="sp-org">台大醫院教學部 教學型主治醫師</div>
+        <div class="sp-badge">專長領域</div>
+        <div class="sp-expertise">科技輔助醫學教育、模擬醫學</div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="sp-name">張予華 護理師</div>
+        <div class="sp-org">台大醫院教學部 教學設計師</div>
+        <div class="sp-badge">專長領域</div>
+        <div class="sp-expertise">數位教學設計、專案管理</div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="sp-name">陳彥廷 工程師</div>
+        <div class="sp-org">台大醫院教學部 醫教工程師</div>
+        <div class="sp-badge">專長領域</div>
+        <div class="sp-expertise">VR/AR 互動技術開發、教學網頁前後端管理</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ REGISTRATION INFO ══ -->
+<section id="reg-info" class="section section-alt">
+  <div class="section-inner">
+    <div class="sec-hd">
+      <div class="sec-eye">REGISTRATION</div>
+      <h2 class="sec-title">報名資訊</h2>
+    </div>
+    <div class="notice-grid">
+
+      <!-- 課程費用 -->
+      <div class="fee-card">
+        <div class="fee-card-title">課程費用</div>
+        <div class="fee-row">
+          <span class="fee-label">本會個人會員完成當年度會費繳納者</span>
+          <span class="fee-free">免費</span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-label">本會團體會員</span>
+          <span class="fee-amount">1,000元／每人</span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-label">非會員</span>
+          <span class="fee-amount">1,500元／每人</span>
+        </div>
+      </div>
+
+      <!-- 注意事項 -->
+      <div class="notice-card">
+        <div class="notice-card-title">注意事項</div>
+        <ul class="notice-list">
+          <li class="notice-item">
+            <div class="notice-bullet"></div>
+            <span>學員請自備可連網筆電，並至少訂閱一種 AI 工具（Gemini、ChatGPT 或 Claude）。</span>
+          </li>
+          <li class="notice-item">
+            <div class="notice-bullet"></div>
+            <span>為維護上課品質，請務必準時出席且全程參與上課。</span>
+          </li>
+          <li class="notice-item">
+            <div class="notice-bullet"></div>
+            <span>課程費用請於收到報名成功通知信後，再依通知進行繳費。</span>
+          </li>
+          <li class="notice-item">
+            <div class="notice-bullet"></div>
+            <span>本活動若因不可抗力之因素，保有修改、取消及延期之權利，並以 Mail 通知參加人員。</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ REGISTRATION ══ -->
+<section id="register" class="section section-alt">
+  <div class="section-inner">
+    <div class="sec-hd">
+      <div class="sec-eye">REGISTRATION</div>
+      <h2 class="sec-title">立即報名</h2>
+      <p style="color:var(--text-muted);font-size:.83rem;margin-top:.65rem">報名截止：115年6月30日（二），限額50位，額滿為止</p>
+    </div>
+    <!-- 額滿通知（預設隱藏，由 JS 控制） -->
+    <div id="reg-full-notice" style="display:none;max-width:560px;margin:0 auto;text-align:center;padding:2.5rem 2rem;background:#fff;border-radius:18px;box-shadow:0 2px 14px rgba(91,191,181,.13)">
+      <div style="font-size:2.6rem;margin-bottom:.7rem">🔒</div>
+      <h3 style="color:var(--navy);font-size:1.2rem;font-weight:800;margin-bottom:.6rem">報名名額已額滿</h3>
+      <p style="color:var(--text-muted);font-size:.87rem;line-height:1.8">線上報名名額暫已額滿，感謝您的踴躍報名。<br>如有需要，請聯絡主辦單位洽詢候補事宜。</p>
+      <a href="mailto:tsmcsd2018@gmail.com" style="display:inline-block;margin-top:1.2rem;padding:.6rem 1.6rem;background:var(--teal);color:#fff;border-radius:24px;font-size:.85rem;font-weight:700;text-decoration:none">聯絡主辦單位</a>
+    </div>
+    <div id="reg-form-wrap">
+    <div class="form-card">
+      <form id="reg-form" novalidate="">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-name">姓名 <span class="req">*</span></label>
+            <input type="text" id="f-name" name="name" placeholder="請輸入您的姓名" required="">
+          </div>
+          <div class="form-group">
+            <label for="f-idno">身分證字號 <span class="req">*</span></label>
+            <input type="text" id="f-idno" name="idno" placeholder="學分登錄用；無需學分請填「無需學分」" required="">
+            <div class="form-hint">學分登錄用；若無需學分請填「無需學分」</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-org">服務單位 <span class="req">*</span></label>
+            <input type="text" id="f-org" name="org" placeholder="如：奇美醫院" required="">
+          </div>
+          <div class="form-group">
+            <label for="f-dept">部門 <span class="req">*</span></label>
+            <input type="text" id="f-dept" name="dept" placeholder="如：營養科" required="">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-title">職稱 <span class="req">*</span></label>
+            <input type="text" id="f-title" name="jobtitle" placeholder="如：營養師" required="">
+          </div>
+          <div class="form-group">
+            <label for="f-phone">聯絡電話／手機 <span class="req">*</span></label>
+            <input type="tel" id="f-phone" name="phone" placeholder="如：0912-345-678" required="">
+          </div>
+        </div>
+        <div class="form-group full">
+          <label for="f-email">Email <span class="req">*</span></label>
+          <input type="email" id="f-email" name="email" placeholder="請輸入聯絡信箱" required="">
+        </div>
+        <div class="form-group full">
+          <label for="f-profession">職類 <span class="req">*</span></label>
+          <select id="f-profession" name="profession" required="">
+            <option value="">── 請選擇職類 ──</option>
+            <option>西醫</option><option>牙醫</option><option>中醫</option>
+            <option>藥事</option><option>醫事放射</option><option>醫事檢驗</option>
+            <option>牙體技術</option><option>護理</option><option>營養</option>
+            <option>呼吸治療</option><option>聽力</option><option>物理治療</option>
+            <option>職能治療</option><option>諮商心理</option><option>語言治療</option>
+            <option>專科護理師</option><option>驗光師</option>
+            <option value="其他">其他</option>
+          </select>
+          <div id="other-profession-wrap">
+            <input type="text" id="f-profession-other" name="profession_other" placeholder="請填寫您的職類">
+          </div>
+        </div>
+        <div class="form-group full">
+          <label>身分別 <span class="req">*</span></label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="is_member" value="本會個人會員" required=""> 本會個人會員</label>
+            <label class="radio-label"><input type="radio" name="is_member" value="本會團體會員"> 本會團體會員</label>
+            <label class="radio-label"><input type="radio" name="is_member" value="非會員"> 非會員</label>
+          </div>
+        </div>
+        <div class="form-notice-box">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          報名送出後，主辦單位將依您填寫之身分別進行資格確認，並以 Email 通知報名結果與繳費資訊，請留意信件通知。
+        </div>
+        <div class="form-submit-row">
+          <button type="submit" class="btn-submit">提交報名</button>
+        </div>
+        <div id="form-error"></div>
+      </form>
+      <div id="form-success">
+        <div class="sico">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#5BBFB5" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M9 12l2 2 4-4"></path></svg>
+        </div>
+        <h3>報名資料已送出！</h3>
+        <p>感謝您填寫「AI × 醫學教學應用工作坊」報名表。主辦單位將依您填寫之身分別進行資格確認，並以 Email 通知報名結果與繳費資訊，請留意信件通知。</p>
+      </div>
+    </div>
+    </div><!-- /#reg-form-wrap -->
+  </div>
+</section>
+
+<!-- ══ TRANSPORT + MAP ══ -->
+<section id="transport" class="section">
+  <div class="section-inner">
+    <div class="sec-hd">
+      <div class="sec-eye">TRANSPORTATION</div>
+      <h2 class="sec-title">交通資訊</h2>
+    </div>
+
+    <div class="tm-grid">
+
+      <!-- 左：交通 -->
+      <div class="transport-card">
+        <div class="tc-notice">
+          <div class="tc-notice-ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b07800" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>
+          </div>
+          <span>會場停車空間有限，<strong>建議多加搭乘大眾運輸工具</strong></span>
+        </div>
+
+        <a href="http://www.chimei.org.tw/newindex/map/cmh_map_1.html" target="_blank" rel="noopener" class="tc-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          開啟奇美醫院停車資訊、交通路線圖
+        </a>
+
+        <ul class="tc-rows">
+
+          <li class="tc-row">
+            <div class="tc-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3A9D8F" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="3" width="16" height="13" rx="3"></rect><path d="M4 10h16M12 3v7"></path><circle cx="8" cy="19" r="1.5"></circle><circle cx="16" cy="19" r="1.5"></circle><path d="M7 19l-1 2M17 19l1 2"></path></svg>
+            </div>
+            <div class="tc-body">
+              <div class="tc-mode">臺　鐵</div>
+              <div class="tc-desc">搭乘火車至<strong>大橋火車站</strong>，再步行至奇美醫院。</div>
+            </div>
+          </li>
+
+          <li class="tc-row">
+            <div class="tc-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3A9D8F" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="6" width="20" height="10" rx="3"></rect><path d="M22 11H2M2 6l2-3h16l2 3"></path><circle cx="6.5" cy="19" r="1.5"></circle><circle cx="17.5" cy="19" r="1.5"></circle><path d="M5.5 19l-1.5 2M18.5 19l1.5 2"></path></svg>
+            </div>
+            <div class="tc-body">
+              <div class="tc-mode">高　鐵</div>
+              <div class="tc-desc">搭乘高鐵至<strong>台南站</strong>，轉乘 <strong>H62 高鐵快捷公車（奇美線）</strong>至奇美醫院。</div>
+            </div>
+          </li>
+
+          <li class="tc-row">
+            <div class="tc-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3A9D8F" stroke-width="1.8" stroke-linecap="round"><path d="M3 17a1 1 0 001 1h1m14-1a1 1 0 01-1 1h-1M1 11l3-6h16l3 6v5a1 1 0 01-1 1H2a1 1 0 01-1-1v-5z"></path><circle cx="7" cy="18" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
+            </div>
+            <div class="tc-body">
+              <div class="tc-mode">高速公路</div>
+              <div class="tc-desc">
+                永康交流道下往台南市區
+                <span class="tc-arrow">→</span> 台1省道
+                <span class="tc-arrow">→</span> 中正南路
+                <span class="tc-arrow">→</span> 中華路
+                <span class="tc-arrow">→</span> 奇美醫院
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- 右：地圖 -->
+      <div class="map-card">
+        <div class="map-card-head">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3A9D8F" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          奇美醫院
+        </div>
+        <div class="map-wrap">
+          <iframe src="https://www.google.com/maps?q=%E5%A5%87%E7%BE%8E%E9%86%AB%E9%99%A2+%E5%8F%B0%E5%8D%97%E5%B8%82%E6%B0%B8%E5%BA%B7%E5%8D%80%E4%B8%AD%E8%8F%AF%E8%B7%AF901%E8%99%9F&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="奇美醫院地圖">
+          </iframe>
+        </div>
+        <div class="map-card-foot">
+          <a href="https://maps.google.com/?q=%E5%A5%87%E7%BE%8E%E9%86%AB%E9%99%A2,%E5%8F%B0%E5%8D%97%E5%B8%82%E6%B0%B8%E5%BA%B7%E5%8D%80%E4%B8%AD%E8%8F%AF%E8%B7%AF901%E8%99%9F" target="_blank" rel="noopener" class="map-link">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            在 Google Maps 開啟
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact" class="section section-alt">
+  <div class="section-inner">
+    <div class="sec-hd">
+      <div class="sec-eye">ORGANIZER &amp; CONTACT</div>
+      <h2 class="sec-title">聯絡資訊</h2>
+    </div>
+    <div class="contact-grid">
+
+      <!-- 左：主辦單位 -->
+      <div class="contact-card">
+        <div class="contact-card-title">主辦單位</div>
+        <ul class="org-list">
+          <li class="org-item"><div class="org-dot"></div>台灣醫事聯合臨床技能發展學會</li>
+          <li class="org-item"><div class="org-dot"></div>奇美醫療財團法人奇美醫院</li>
+        </ul>
+      </div>
+
+      <!-- 右：聯絡窗口 -->
+      <div class="contact-card">
+        <div class="contact-card-title">聯絡窗口</div>
+        <div class="ci-rows">
+          <div class="ci-row">
+            <span class="ci-lbl">秘書處</span>
+            <span class="ci-val">楊依玲 小姐</span>
+          </div>
+          <div class="ci-row">
+            <span class="ci-lbl">電話</span>
+            <span class="ci-val"><a href="tel:+886-6-2812811,57426">06-2812811 #57426</a></span>
+          </div>
+          <div class="ci-row">
+            <span class="ci-lbl">Email</span>
+            <span class="ci-val"><a href="mailto:tsmcsd2018@gmail.com">tsmcsd2018@gmail.com</a></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="f-logo">AI × 醫學教學應用工作坊</div>
+  <p>115年7月18日（週六）· 奇美醫院 第五醫療大樓 552會議室</p>
+  <p style="margin-top:.55rem;font-size:.7rem;color:#4a6a88">© 2026 台灣醫事聯合臨床技能發展學會 · All rights reserved.</p>
+</footer>
+
+<!-- ══ SCRIPTS ══ -->
+<script>
+  // Burger
+  document.getElementById('burger').addEventListener('click',function(){
+    document.getElementById('nav-menu').classList.toggle('open');
+  });
+  document.querySelectorAll('#nav-menu a').forEach(function(a){
+    a.addEventListener('click',function(){document.getElementById('nav-menu').classList.remove('open');});
+  });
+
+  // Countdown
+  (function(){
+    var target=new Date('2026-07-18T13:15:00+08:00').getTime();
+    function pad(n){return String(n).padStart(2,'0');}
+    function tick(){
+      var diff=target-Date.now();
+      if(diff<=0){
+        document.getElementById('cd-boxes').style.display='none';
+        var done=document.getElementById('cd-done');
+        done.textContent='工作坊進行中！';done.style.display='inline';return;
+      }
+      document.getElementById('cd-d').textContent=pad(Math.floor(diff/86400000));
+      document.getElementById('cd-h').textContent=pad(Math.floor((diff%86400000)/3600000));
+      document.getElementById('cd-m').textContent=pad(Math.floor((diff%3600000)/60000));
+      document.getElementById('cd-s').textContent=pad(Math.floor((diff%60000)/1000));
+    }
+    tick();setInterval(tick,1000);
+  })();
+
+  // ── 報名類別（此 repo 為院內版）──
+  var REG_CATEGORY = 'cm';
+  var GAS_URL = 'https://script.google.com/macros/s/AKfycbxHD3P4d1XLfYuYLkXzFmMvRr5bjbqVzQc_HU4s1A2MI7vjdnbX8fvISmAEe2T6usBt/exec';
+
+  // ── 額滿偵測（依類別檢查）──
+  (function(){
+    fetch(GAS_URL+'?category='+REG_CATEGORY,{method:'GET'})
+      .then(function(r){return r.json();})
+      .then(function(d){
+        if(d.isFull){
+          document.getElementById('reg-form-wrap').style.display='none';
+          document.getElementById('reg-full-notice').style.display='block';
+        }
+      })
+      .catch(function(){/* 無法取得時維持開放，不影響使用 */});
+  })();
+
+  // 其他職類（顯示並設為必填）
+  document.getElementById('f-profession').addEventListener('change',function(){
+    var isOther=this.value==='其他';
+    var wrap=document.getElementById('other-profession-wrap');
+    var inp=document.getElementById('f-profession-other');
+    wrap.style.display=isOther?'block':'none';
+    inp.required=isOther;
+    if(!isOther)inp.value='';
+  });
+
+  // Form
+  document.getElementById('reg-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var form=e.target,btn=form.querySelector('.btn-submit'),err=document.getElementById('form-error');
+    var v={name:form.name.value.trim(),idno:form.idno.value.trim(),
+      org:form.org.value.trim(),dept:form.dept.value.trim(),
+      jt:form.jobtitle.value.trim(),ph:form.phone.value.trim(),em:form.email.value.trim(),
+      prof:form.profession.value,mem:form.is_member.value};
+    if(!v.name||!v.idno||!v.org||!v.dept||!v.jt||!v.ph||!v.em||!v.prof||!v.mem){
+      err.textContent='請填寫所有必填欄位（標有 * 者）。';err.style.display='block';return;
+    }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.em)){
+      err.textContent='Email 格式不正確，請重新輸入。';err.style.display='block';return;
+    }
+    err.style.display='none';
+    var profOther=v.prof==='其他'?(document.getElementById('f-profession-other').value.trim()||'未填'):'';
+    var payload={
+      category:    REG_CATEGORY,
+      name:        v.name,
+      idNumber:    v.idno,
+      org:         v.org,
+      dept:        v.dept,
+      title:       v.jt,
+      phone:       v.ph,
+      email:       v.em,
+      profession:  v.prof,
+      professionOther: profOther,
+      isMember:    v.mem
+    };
+    btn.textContent='提交中……';btn.disabled=true;
+    fetch(GAS_URL,{method:'POST',mode:'no-cors',
+      headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+    .then(function(){form.style.display='none';var s=document.getElementById('form-success');s.style.display='block';s.scrollIntoView({behavior:'smooth',block:'center'});})
+    .catch(function(){
+      err.textContent='提交失敗，請稍後再試，或直接 Email 至 tsmcsd2018@gmail.com 報名。';
+      err.style.display='block';btn.textContent='提交報名';btn.disabled=false;
+    });
+  });
+</script>
+
+
+</body></html>
