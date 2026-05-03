@@ -864,7 +864,7 @@
     tick();setInterval(tick,1000);
   })();
 
-  // ── 報名類別（此 repo 為院內版）──
+  // ── 報名類別（此 repo 為公開版）──
   var REG_CATEGORY = 'cm';
   var GAS_URL = 'https://script.google.com/macros/s/AKfycbxHD3P4d1XLfYuYLkXzFmMvRr5bjbqVzQc_HU4s1A2MI7vjdnbX8fvISmAEe2T6usBt/exec';
 
@@ -902,11 +902,22 @@
     if(!v.name||!v.idno||!v.org||!v.dept||!v.jt||!v.ph||!v.em||!v.prof||!v.mem){
       err.textContent='請填寫所有必填欄位（標有 * 者）。';err.style.display='block';return;
     }
+    // 「職類」選了「其他」時，必須填寫說明
+    var profOtherInput=document.getElementById('f-profession-other');
+    var profOther='';
+    if(v.prof==='其他'){
+      profOther=profOtherInput.value.trim();
+      if(!profOther){
+        err.textContent='選擇「其他」職類時，請填寫您的職類說明。';
+        err.style.display='block';
+        profOtherInput.focus();
+        return;
+      }
+    }
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.em)){
       err.textContent='Email 格式不正確，請重新輸入。';err.style.display='block';return;
     }
     err.style.display='none';
-    var profOther=v.prof==='其他'?(document.getElementById('f-profession-other').value.trim()||'未填'):'';
     var payload={
       category:    REG_CATEGORY,
       name:        v.name,
